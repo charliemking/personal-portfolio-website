@@ -1,6 +1,6 @@
 # Charlie King - Personal Portfolio
 
-A retro game-style personal portfolio website built with React, TypeScript, and Tailwind CSS.
+This project is a personal portfolio website designed with a retro game theme. It showcases various aspects of my profile, including academic foundations, AI projects, professional experience, personal interests, and future aspirations, presented as different "levels" within a game.
 
 ## Features
 - Interactive game-like navigation
