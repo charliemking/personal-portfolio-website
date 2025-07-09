@@ -144,11 +144,6 @@ const Level4Experience: React.FC = () => {
                   type: 'spring',
                   bounce: 0.4
                 }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -10,
-                  transition: { duration: 0.3 }
-                }}
                 className={`relative bg-gradient-to-br ${exp.color} p-1 rounded-xl group cursor-pointer`}
               >
                 {/* Power-up glow effect */}
@@ -216,8 +211,6 @@ const Level4Experience: React.FC = () => {
                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                     transition={{ delay: 2.1 + index * 0.3 }}
                     onClick={() => setExpandedExperience(expandedExperience === index ? null : index)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                     className="w-full bg-white bg-opacity-10 hover:bg-opacity-20 text-white py-2 px-4 rounded-lg text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2"
                   >
                     <Info size={16} />
@@ -298,9 +291,9 @@ const Level4Experience: React.FC = () => {
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ scale: 0, rotate: -180 }}
-              animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
-              transition={{ delay: 2.7 + index * 0.1, type: 'spring', bounce: 0.5 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.8, delay: 2.7 + index * 0.1 }}
               className="bg-black bg-opacity-60 border-2 border-yellow-500 p-4 text-center"
             >
               <div className="text-2xl mb-2">{stat.icon}</div>

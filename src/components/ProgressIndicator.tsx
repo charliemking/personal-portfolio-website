@@ -23,10 +23,18 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ currentLayer }) =
               className={`flex items-center gap-3 cursor-pointer transition-all duration-300 ${
                 currentLayer === index ? 'text-white' : 'text-blue-300 opacity-60'
               }`}
-              whileHover={{ scale: 1.1 }}
               onClick={() => {
-                const element = document.querySelector(`section:nth-child(${index + 1})`);
-                element?.scrollIntoView({ behavior: 'smooth' });
+                const levelMap = ['start', '1', '2', '3', '4', '5', '6'];
+                const element = document.querySelector(`[data-level="${levelMap[index]}"]`);
+                if (element) {
+                  const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
+                  const offsetPosition = elementTop - 100; // Small offset for breathing room
+                  
+                  window.scrollTo({
+                    top: Math.max(0, offsetPosition),
+                    behavior: 'smooth'
+                  });
+                }
               }}
             >
               <div className={`relative ${currentLayer === index ? 'scale-110' : ''}`}>

@@ -9,14 +9,14 @@ const LevelBonusFootball: React.FC = () => {
   const stats = [
     { name: 'Discipline', level: 5, color: 'bg-green-500' },
     { name: 'Grit', level: 5, color: 'bg-green-500' },
-    { name: 'Sleep', level: 2, color: 'bg-red-500' }
+    { name: 'Sleep', level: 0, color: 'bg-green-500' }
   ];
 
   const achievements = [
     {
       icon: Shield,
       title: 'Walk-On Warrior',
-      description: 'Earned spot on Duke Football roster through determination',
+      description: 'Earned spot on Div. 1 Duke Football roster through relentless determination',
       unlocked: true
     },
     {
@@ -184,46 +184,48 @@ const LevelBonusFootball: React.FC = () => {
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Locker door opening animation */}
+        {/* Side Quest Bubble */}
         <motion.div
-          initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-          animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-          transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
-          className="text-center mb-16"
+          initial={{ opacity: 0, scale: 0.8, y: 50 }}
+          animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }}
+          transition={{ duration: 1, delay: 0.3, type: 'spring', bounce: 0.4 }}
+          className="text-center mb-16 relative"
         >
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-sm text-green-400 mb-2 font-bold"
-          >
-            SIDE QUEST
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="text-3xl md:text-5xl font-bold text-white mb-6"
-          >
-            IRON SHARPENS IRON
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="text-lg text-green-300 max-w-2xl mx-auto mb-4"
-          >
-            "Walked on to Duke Football. Walked out sharper."
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
-            className="text-base text-gray-300 max-w-3xl mx-auto leading-relaxed"
-          >
-            Training 30+ hours per week while studying CS taught me how to show up, 
-            push through friction, and trust the reps — whether it's on the field or in code.
-          </motion.p>
+          <div className="inline-block bg-gradient-to-r from-green-500 to-green-700 text-white px-12 py-6 font-bold text-xl border-4 border-green-400">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="text-sm text-green-400 mb-2 font-bold"
+            >
+              SIDE QUEST
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="text-2xl md:text-3xl font-bold text-white mb-4"
+            >
+              IRON SHARPENS IRON
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="text-lg text-cyan-300 mb-4"
+            >
+              "Walked on to Duke Football. Walked out sharper."
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+              className="text-sm text-gray-300 max-w-3xl mx-auto leading-relaxed font-normal"
+            >
+              Training 30+ hours per week while studying CS taught me how to show up, 
+              push through friction, and trust the reps — whether it's on the field or in code.
+            </motion.p>
+          </div>
         </motion.div>
 
         {/* Status bars */}
@@ -287,15 +289,13 @@ const LevelBonusFootball: React.FC = () => {
                 type: 'spring',
                 bounce: 0.4
               }}
-              whileHover={{ scale: 1.05, y: -5 }}
               className="bg-gradient-to-br from-green-600 to-green-800 p-1 rounded-xl"
             >
-              <div className="bg-black bg-opacity-80 rounded-xl p-6 h-full text-center">
+              <div className="bg-black bg-opacity-80 rounded-xl p-6 h-full text-center flex flex-col min-h-[280px]">
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
                   animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
                   transition={{ delay: 2.4 + index * 0.3, type: 'spring', bounce: 0.4 }}
-                  whileHover={{ rotate: 360, scale: 1.2 }}
                   className="mb-4"
                 >
                   <achievement.icon size={40} className="text-green-400 mx-auto" />
@@ -305,7 +305,7 @@ const LevelBonusFootball: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ delay: 2.6 + index * 0.3 }}
-                  className="text-white font-bold text-lg mb-2"
+                  className="text-cyan-300 font-bold text-lg mb-2"
                 >
                   {achievement.title}
                 </motion.h3>
@@ -314,21 +314,23 @@ const LevelBonusFootball: React.FC = () => {
                   initial={{ opacity: 0, y: 15 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
                   transition={{ delay: 2.7 + index * 0.3 }}
-                  className="text-gray-300 text-sm leading-relaxed mb-4"
+                  className="text-gray-300 text-sm leading-relaxed flex-1"
                 >
                   {achievement.description}
                 </motion.p>
 
-                {achievement.unlocked && (
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
-                    transition={{ delay: 2.8 + index * 0.3, type: 'spring', bounce: 0.6 }}
-                    className="bg-green-500 bg-opacity-20 border border-green-500 px-3 py-1 rounded text-green-400 text-xs font-bold"
-                  >
-                    ✓ UNLOCKED
-                  </motion.div>
-                )}
+                <div className="mt-auto">
+                  {achievement.unlocked && (
+                    <motion.div
+                      initial={{ scale: 0, rotate: -180 }}
+                      animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+                      transition={{ delay: 2.8 + index * 0.3, type: 'spring', bounce: 0.6 }}
+                      className="bg-green-500 bg-opacity-20 border border-green-500 px-3 py-1 rounded text-green-400 text-xs font-bold text-center"
+                    >
+                      ✓ UNLOCKED
+                    </motion.div>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}

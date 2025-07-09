@@ -81,12 +81,6 @@ const ProjectLayer: React.FC = () => {
               initial={{ opacity: 0, y: 100, rotateX: 45 }}
               animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              whileHover={{ 
-                y: -10, 
-                scale: 1.02,
-                rotateY: 5,
-                transition: { duration: 0.3 }
-              }}
               className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 hover:border-opacity-40 transition-all duration-300 cursor-pointer group"
             >
               <div className="mb-4">
@@ -118,8 +112,6 @@ const ProjectLayer: React.FC = () => {
               <div className="flex gap-3">
                 <motion.a
                   href={project.github}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
                   className="flex items-center gap-2 text-blue-200 hover:text-white transition-colors duration-300"
                 >
                   <Github size={18} />
@@ -127,8 +119,6 @@ const ProjectLayer: React.FC = () => {
                 </motion.a>
                 <motion.a
                   href={project.link}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
                   className="flex items-center gap-2 text-blue-200 hover:text-white transition-colors duration-300"
                 >
                   <ExternalLink size={18} />

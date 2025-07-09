@@ -44,10 +44,17 @@ const GameUI: React.FC<GameUIProps> = ({ currentLevel, gameStarted }) => {
                   className={`flex items-center gap-2 cursor-pointer transition-all duration-300 ${
                     isActive ? 'scale-110' : isCompleted ? 'opacity-60' : 'opacity-40'
                   }`}
-                  whileHover={{ scale: 1.1 }}
                   onClick={() => {
-                    const element = document.querySelector(`section:nth-child(${levelIndex + 1})`);
-                    element?.scrollIntoView({ behavior: 'smooth' });
+                    const element = document.querySelector(`[data-level="${levelIndex}"]`);
+                    if (element) {
+                      const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
+                      const offsetPosition = elementTop - 100; // Small offset for breathing room
+                      
+                      window.scrollTo({
+                        top: Math.max(0, offsetPosition),
+                        behavior: 'smooth'
+                      });
+                    }
                   }}
                 >
                   <div className="relative">
@@ -91,7 +98,7 @@ const GameUI: React.FC<GameUIProps> = ({ currentLevel, gameStarted }) => {
         </div>
 
         {/* Current Level Display */}
-        <div className="bg-black bg-opacity-80 border-2 border-green-500 p-3 text-xs text-center">
+        <div className="bg-black bg-opacity-80 border-2 border-green-500 p-3 text-xs text-center md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
           <div className="text-green-400 font-bold mb-1">CURRENT LEVEL</div>
           <div className="text-white font-bold">{levels[currentLevel]?.name || 'UNKNOWN'}</div>
         </div>

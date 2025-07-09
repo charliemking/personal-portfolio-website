@@ -60,8 +60,6 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame, gameStarted }) =
         >
           <motion.button
             onClick={onStartGame}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="group bg-green-500 hover:bg-green-400 text-black px-8 py-4 text-lg font-bold border-4 border-green-600 hover:border-green-500 transition-all duration-200 flex items-center gap-3 mx-auto"
             style={{ imageRendering: 'pixelated' }}
           >

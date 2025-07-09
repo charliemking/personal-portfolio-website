@@ -112,17 +112,10 @@ const InterestsLayer: React.FC = () => {
                 type: 'spring',
                 bounce: 0.4
               }}
-              whileHover={{ 
-                scale: 1.1, 
-                rotate: [0, -5, 5, 0],
-                transition: { duration: 0.5 }
-              }}
               className="bg-gradient-to-br from-purple-500 to-pink-500 p-1 rounded-2xl group cursor-pointer"
             >
               <div className="bg-black bg-opacity-40 backdrop-blur-lg rounded-xl p-6 h-full flex flex-col items-center text-center hover:bg-opacity-20 transition-all duration-300">
                 <motion.div
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  transition={{ duration: 0.6 }}
                   className="text-4xl mb-3"
                 >
                   {interest.emoji}
@@ -159,16 +152,12 @@ const InterestsLayer: React.FC = () => {
           <div className="flex justify-center gap-4">
             <motion.a
               href="mailto:charlie@example.com"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
             >
               Get in Touch
             </motion.a>
             <motion.a
               href="#"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300"
             >
               View Resume

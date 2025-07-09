@@ -113,7 +113,6 @@ const Level2AI: React.FC = () => {
               initial={{ opacity: 0, y: 120, rotateX: 45, scale: 0.8 }}
               animate={isInView ? { opacity: 1, y: 0, rotateX: 0, scale: 1 } : { opacity: 0, y: 120, rotateX: 45, scale: 0.8 }}
               transition={{ duration: 1.2, delay: 1.1 + index * 0.4, ease: 'easeOut' }}
-              whileHover={{ scale: 1.05, rotateY: 5 }}
               className={`bg-gradient-to-br ${project.color} p-1 rounded-lg`}
             >
               <div className="bg-black bg-opacity-80 p-6 rounded-lg h-full">
@@ -231,8 +230,6 @@ const Level2AI: React.FC = () => {
         >
           <motion.button
             onClick={() => setShowMoreInfo(!showMoreInfo)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg border-2 border-blue-400 hover:border-purple-400 transition-all duration-300 flex items-center gap-3 mx-auto"
           >
             <Info size={20} />

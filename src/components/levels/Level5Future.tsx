@@ -146,11 +146,6 @@ const Level5Future: React.FC = () => {
                 type: 'spring',
                 bounce: 0.6
               }}
-              whileHover={{ 
-                scale: 1.1, 
-                rotate: [0, -5, 5, 0],
-                transition: { duration: 0.5 }
-              }}
               onClick={() => setSelectedInterest(index)}
               className="bg-gradient-to-br from-purple-600 to-pink-600 p-1 rounded-lg group cursor-pointer"
             >
@@ -159,7 +154,6 @@ const Level5Future: React.FC = () => {
                   initial={{ scale: 0, rotate: -180 }}
                   animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
                   transition={{ delay: 1.3 + index * 0.1, type: 'spring', bounce: 0.4 }}
-                  whileHover={{ scale: 1.3, rotate: 360 }}
                   className="text-3xl mb-2"
                 >
                   {interest.emoji}
@@ -211,8 +205,6 @@ const Level5Future: React.FC = () => {
                   {/* Close button */}
                   <motion.button
                     onClick={() => setSelectedInterest(null)}
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.9 }}
                     className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-300"
                   >
                     <X size={24} />
@@ -369,7 +361,6 @@ const Level5Future: React.FC = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                   transition={{ delay: 3.8 + index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
                   className={`flex items-center gap-2 ${link.color} hover:text-white transition-colors duration-300`}
                 >
                   <link.icon size={16} />

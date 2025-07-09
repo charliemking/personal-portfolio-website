@@ -97,22 +97,32 @@ const Level1Foundations: React.FC = () => {
               key={project.name}
               initial={{ opacity: 0, x: index % 2 === 0 ? -120 : 120, rotateY: index % 2 === 0 ? -15 : 15 }}
               animate={isInView ? { opacity: 1, x: 0, rotateY: 0 } : { opacity: 0, x: index % 2 === 0 ? -120 : 120, rotateY: index % 2 === 0 ? -15 : 15 }}
-              transition={{ duration: 1.2, delay: 1.1 + index * 0.3, ease: 'easeOut' }}
-              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ 
+                duration: 1.6, 
+                delay: 1.1, 
+                ease: [0.23, 1, 0.32, 1],
+                type: 'tween'
+              }}
               className="bg-black bg-opacity-60 border-4 border-green-500 p-6 hover:border-green-400 transition-all duration-300"
             >
               <div className="flex items-center gap-3 mb-4">
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
                   animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
-                  transition={{ duration: 0.8, delay: 1.3 + index * 0.3, type: 'spring', bounce: 0.4 }}
+                  transition={{ 
+                    duration: 0.8, 
+                    delay: 1.3, 
+                    type: 'spring', 
+                    bounce: 0.2,
+                    damping: 18
+                  }}
                 >
                   <project.icon size={32} className="text-green-400" />
                 </motion.div>
                 <motion.h3 
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.8, delay: 1.5 + index * 0.3 }}
+                  transition={{ duration: 0.8, delay: 1.5, ease: [0.23, 1, 0.32, 1] }}
                   className="text-xl font-bold text-white"
                 >
                   {project.name}
@@ -122,7 +132,7 @@ const Level1Foundations: React.FC = () => {
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.8, delay: 1.7 + index * 0.3 }}
+                transition={{ duration: 0.8, delay: 1.7, ease: [0.23, 1, 0.32, 1] }}
                 className="text-gray-300 mb-4 text-sm leading-relaxed"
               >
                 {project.description}
@@ -134,7 +144,11 @@ const Level1Foundations: React.FC = () => {
                     key={tech}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                    transition={{ duration: 0.5, delay: 1.9 + index * 0.3 + techIndex * 0.1 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: 1.9 + techIndex * 0.1,
+                      ease: [0.23, 1, 0.32, 1]
+                    }}
                     className="px-2 py-1 bg-green-500 bg-opacity-20 text-green-400 text-xs border border-green-500"
                   >
                     {tech}
@@ -149,7 +163,11 @@ const Level1Foundations: React.FC = () => {
                     key={stat} 
                     initial={{ opacity: 0, x: -30 }}
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                    transition={{ duration: 0.6, delay: 2.1 + index * 0.3 + statIndex * 0.1 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: 2.1 + statIndex * 0.1,
+                      ease: [0.23, 1, 0.32, 1]
+                    }}
                     className="flex items-center justify-between text-xs"
                   >
                     <span className="text-gray-400 uppercase">{stat}:</span>
@@ -158,7 +176,11 @@ const Level1Foundations: React.FC = () => {
                         <motion.div
                           initial={{ width: 0 }}
                           animate={isInView ? { width: typeof value === 'string' && value.includes('%') ? value : '100%' } : { width: 0 }}
-                          transition={{ duration: 1.5, delay: 2.3 + index * 0.3 + statIndex * 0.2, ease: 'easeOut' }}
+                          transition={{ 
+                            duration: 1.2, 
+                            delay: 2.3 + statIndex * 0.2, 
+                            ease: [0.23, 1, 0.32, 1]
+                          }}
                           className="h-full bg-green-400"
                         />
                       </div>
@@ -175,21 +197,21 @@ const Level1Foundations: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 100, scale: 0.9 }}
           animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 100, scale: 0.9 }}
-          transition={{ duration: 1.2, delay: 2.5, ease: 'easeOut' }}
+          transition={{ duration: 1.2, delay: 2.7, ease: [0.23, 1, 0.32, 1] }}
           className="mt-12 bg-black border-4 border-green-500 p-4"
         >
           <div className="flex items-center gap-2 mb-4 border-b border-green-500 pb-2">
             <motion.div
               initial={{ scale: 0 }}
               animate={isInView ? { scale: 1 } : { scale: 0 }}
-              transition={{ duration: 0.5, delay: 2.7 }}
+              transition={{ duration: 0.5, delay: 2.9 }}
             >
               <Terminal size={16} className="text-green-400" />
             </motion.div>
             <motion.span 
               initial={{ opacity: 0, x: -10 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-              transition={{ duration: 0.5, delay: 2.8 }}
+              transition={{ duration: 0.5, delay: 3.0 }}
               className="text-green-400 text-sm"
             >
               terminal.exe
@@ -211,7 +233,7 @@ const Level1Foundations: React.FC = () => {
                 key={lineIndex}
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{ duration: 0.5, delay: 2.9 + lineIndex * 0.2 }}
+                transition={{ duration: 0.5, delay: 3.1 + lineIndex * 0.15 }}
                 className={line.color}
               >
                 {line.text}
@@ -220,7 +242,7 @@ const Level1Foundations: React.FC = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: [1, 0, 1] } : { opacity: 0 }}
-              transition={{ duration: 1, repeat: Infinity, delay: 4.8 }}
+              transition={{ duration: 1, repeat: Infinity, delay: 5.0 }}
               className="text-green-400 inline-block"
             >
               $ █

@@ -15,6 +15,22 @@ const RetroGameWebsite: React.FC = () => {
   const [currentLevel, setCurrentLevel] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
 
+  // Reset scroll position on page load/reload
+  useEffect(() => {
+    // Scroll to top immediately on component mount
+    window.scrollTo(0, 0);
+    
+    // Also handle browser back/forward navigation
+    const handleBeforeUnload = () => {
+      window.scrollTo(0, 0);
+    };
+    
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
   // Transform scroll progress to background color - improved transitions for level 5
   const backgroundColor = useTransform(
     scrollYProgress,
@@ -34,36 +50,64 @@ const RetroGameWebsite: React.FC = () => {
     ]
   );
 
+  // Improved scroll detection using Intersection Observer
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (progress) => {
-      if (progress < 0.14) setCurrentLevel(0);
-      else if (progress < 0.28) setCurrentLevel(1);
-      else if (progress < 0.42) setCurrentLevel(2);
-      else if (progress < 0.56) setCurrentLevel(3);
-      else if (progress < 0.7) setCurrentLevel(4);
-      else if (progress < 0.84) setCurrentLevel(5); // Bonus football level
-      else setCurrentLevel(6); // Future level
+    const sections = [
+      { element: document.querySelector('[data-level="start"]'), level: 0 },
+      { element: document.querySelector('[data-level="1"]'), level: 1 },
+      { element: document.querySelector('[data-level="2"]'), level: 2 },
+      { element: document.querySelector('[data-level="3"]'), level: 3 },
+      { element: document.querySelector('[data-level="4"]'), level: 4 },
+      { element: document.querySelector('[data-level="5"]'), level: 5 },
+      { element: document.querySelector('[data-level="6"]'), level: 6 }
+    ].filter(section => section.element);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const level = parseInt(entry.target.getAttribute('data-level') || '0');
+            setCurrentLevel(level);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+        rootMargin: '-20% 0px -20% 0px' // Add margin to prevent rapid switching
+      }
+    );
+
+    sections.forEach(section => {
+      if (section.element) {
+        observer.observe(section.element);
+      }
     });
 
-    return () => unsubscribe();
-  }, [scrollYProgress]);
+    return () => {
+      sections.forEach(section => {
+        if (section.element) {
+          observer.unobserve(section.element);
+        }
+      });
+    };
+  }, []);
 
   const handleStartGame = () => {
     setGameStarted(true);
-    // Scroll to Level 1 with offset to account for header
+    // Scroll to Level 1 at the very beginning
     const level1Element = document.querySelector('[data-level="1"]');
     if (level1Element) {
       const elementTop = level1Element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementTop - 120; // Offset for header height
+      const offsetPosition = elementTop - 100; // Small offset for breathing room
       
       window.scrollTo({
-        top: offsetPosition,
+        top: Math.max(0, offsetPosition),
         behavior: 'smooth'
       });
     } else {
       // Fallback: scroll to slightly past the first screen
       window.scrollTo({ 
-        top: window.innerHeight + 120, 
+        top: window.innerHeight + 100, 
         behavior: 'smooth' 
       });
     }
@@ -78,7 +122,9 @@ const RetroGameWebsite: React.FC = () => {
       <GameUI currentLevel={currentLevel} gameStarted={gameStarted} />
       
       <div className="relative z-10">
-        <StartScreen onStartGame={handleStartGame} gameStarted={gameStarted} />
+        <div data-level="start">
+          <StartScreen onStartGame={handleStartGame} gameStarted={gameStarted} />
+        </div>
         <div data-level="1">
           <Level1Foundations />
         </div>
